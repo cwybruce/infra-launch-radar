@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infra Radar — AI &amp; Infrastructure Token Launch Radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="pulse" aria-hidden="true"></div>
+    <div>
+      <h1>INFRA RADAR</h1>
+      <p class="tag">AI &amp; infrastructure token launches, ranked by what a launch would be worth</p>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<section class="model" id="model"></section>
+
+<section class="controls">
+  <input id="q" type="search" placeholder="Search a protocol…" aria-label="Search protocols">
+  <select id="lens" aria-label="Lens">
+    <option value="all">Lens: full board</option>
+    <option value="infra">Lens: AI &amp; infra only</option>
+    <option value="watchlist">Lens: watchlist only</option>
+  </select>
+  <select id="cat" aria-label="Category"><option value="">Category: all</option></select>
+  <select id="sort" aria-label="Sort by">
+    <option value="implied">Sort: implied value ↓</option>
+    <option value="tvl">Sort: TVL ↓</option>
+    <option value="growth">Sort: 7-day growth ↓</option>
+    <option value="age">Sort: longest tracked ↓</option>
+    <option value="chains">Sort: most chains ↓</option>
+  </select>
+  <span class="count" id="count"></span>
+</section>
+
+<main class="layout">
+  <section class="board-wrap">
+    <table class="board">
+      <thead><tr>
+        <th class="num">#</th><th>Protocol</th><th>Category</th>
+        <th class="num">TVL</th><th class="num">7d</th><th class="num">Chains</th>
+        <th class="num">Implied value</th><th class="num">Demand</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="hint">Click any row for its detail view and 5-step farm plan.</p>
+  </section>
+  <aside class="detail" id="detail" aria-live="polite"></aside>
+</main>
+
+<section class="comps">
+  <h2>Live comparables — infra tokens already trading</h2>
+  <p class="note">The anchor multiple is the median of this table. AI protocols in this snapshot already record tokens (Chutes, MorpheusAI, ZyFAI below), so the pre-token AI &amp; infra opportunity sits in chains, restaking, oracle/data and the curator infra that routes capital into them.</p>
+  <table class="board">
+    <thead><tr><th>Token protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">mcap / TVL</th></tr></thead>
+    <tbody id="comps"></tbody>
+  </table>
+</section>
+
+<footer class="foot">
+  <h2>How the number is built</h2>
+  <p>Implied value = TVL × <b>M</b> × <b>D</b> × <b>G</b> × <b>A</b> × <b>C</b>. <b>M</b> is the median mcap/TVL of the live infra tokens above, computed from this snapshot. <b>D</b> is the infra-demand multiplier by category (AI 1.50, Chain 1.40, DOR 1.35, Restaking 1.30, Risk Curators / Allocators 1.15, Collateral Markets 1.10, everything else 1.00). <b>G</b> is 1 + the 7-day TVL change clamped to −30%…+60%. <b>A</b> is maturity: 0.85 for a new listing, 1.00 at four years tracked. <b>C</b> is chain breadth: 1 + 0.03 per extra chain, capped at 15.</p>
+  <p>Coverage: every protocol in the snapshot that records no token and is not a wrapped, staked or bridged product of a token that trades — the full watchlist plus the early ones below the floor. “Records no token” is DefiLlama’s record, not proof a protocol has none. The implied value is this entry’s own claim, never make.fun’s, and not a prediction that a token will be issued. Farm plans are starting points: check fees and risks yourself before moving funds.</p>
+  <p class="src" id="src"></p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
